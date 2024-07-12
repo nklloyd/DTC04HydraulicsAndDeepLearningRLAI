@@ -10,15 +10,15 @@ os.makedirs(log_dir, exist_ok=True)
 env = gym.make("Pendulum-v1", render_mode="human")
 env = Monitor(env, log_dir)
 
-model = TD3("MlpPolicy", env, verbose=1, tensorboard_log="./td3_pendulum_graph/")
+#model = TD3("MlpPolicy", env, verbose=1, tensorboard_log="./td3_pendulum_graph/")
 
 eval_callback = EvalCallback(env, best_model_save_path='./logs/',
                              log_path='./logs/', eval_freq=500,
                              deterministic=True, render=False)
 
-model.learn(total_timesteps=10000, log_interval=4)
-model.save("td3_pendulum2")
-model = TD3.load("td3_pendulum2", env=env)
+#model.learn(total_timesteps=10000, log_interval=4)
+#model.save("td3_pendulum2")
+model = TD3.load("td3_pendulum", env=env)
 
 obs, info = env.reset()
 while True:
